@@ -67,6 +67,7 @@ import java.util.Scanner;
             // If any errors occur, an appropriate error message should be displayed.
             try {
                 File file = new File(fileName);
+
                 if (!file.exists()) {
                     file.createNewFile();
                 }
@@ -75,37 +76,22 @@ import java.util.Scanner;
                 String line;
 
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("\\\\|");
-                    if (parts.length == 5) {
-                        String dateStr = parts[0].trim();
-                        String timeStr = parts[1].trim();
-                        String description = parts[2].trim();
-                        String vendor = parts[3].trim();
-                        double amount = Double.parseDouble(parts[4].trim());
-
-                        LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
-                        LocalTime time = LocalTime.parse(timeStr, TIME_FORMATTER);
-
+                    String[] parts = line.split("\\|");
+                    if (parts.length == 4) {
+                        LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER);
+                        LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);
+                        String description = parts[2];
+                        String vendor = parts[3];
+                        double amount = Double.parseDouble(parts[4]);
                         transactions.add(new Transaction(date, time, description, vendor, amount));
-
-
                     }
                 }
+
                 reader.close();
-
-            } catch (IOException e) catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.err.println("Error loading transactions: " + e.getMessage());
             }
-            System.err.println("Error loading transactions: " + e.getMessage());
-
         }
-            }
 
 
 
@@ -115,6 +101,24 @@ import java.util.Scanner;
             // The amount should be a positive number.
             // After validating the input, a new `Deposit` object should be created with the entered values.
             // The new deposit should be added to the `transactions` ArrayList.
+
+            System.out.print("Enter the date (yyyy-MM-dd HH:mm:ss): ");
+            String dateStr = scanner.nextLine().trim();
+            System.out.print("Enter the description: ");
+            String description = scanner.nextLine().trim();
+            System.out.print("Enter the vendor: ");
+            String vendor = scanner.nextLine().trim();
+            System.out.print("Enter the amount: ");
+            double amount = Double.parseDouble(scanner.nextLine().trim());
+
+            LocalDate date = LocalDate.parse(dateStr.split(" ")[0], DATE_FORMATTER);
+            LocalTime TIME = LocalTime.parse(dateStr.split(" ")[1], TIME_FORMATTER);
+
+            Object time = null;
+            transactions.add(new Deposit(date, time, description, vendor, amount));
+            saveTransactions(FILE_NAME);
+
+
         }
 
         private static void addPayment(Scanner scanner) {
