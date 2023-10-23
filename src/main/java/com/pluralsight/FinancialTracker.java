@@ -102,20 +102,20 @@ import java.util.Scanner;
             // After validating the input, a new `Deposit` object should be created with the entered values.
             // The new deposit should be added to the `transactions` ArrayList.
 
-            System.out.print("Enter the date (yyyy-MM-dd HH:mm:ss): ");
+            System.out.print("Enter deposit date (yyyy-MM-dd HH:mm:ss): ");
             String dateStr = scanner.nextLine().trim();
-            System.out.print("Enter the description: ");
+            System.out.print("Enter description: ");
             String description = scanner.nextLine().trim();
-            System.out.print("Enter the vendor: ");
+            System.out.print("Enter vendor: ");
             String vendor = scanner.nextLine().trim();
-            System.out.print("Enter the amount: ");
+            System.out.print("Enter amount: ");
             double amount = Double.parseDouble(scanner.nextLine().trim());
 
             LocalDate date = LocalDate.parse(dateStr.split(" ")[0], DATE_FORMATTER);
-            LocalTime TIME = LocalTime.parse(dateStr.split(" ")[1], TIME_FORMATTER);
+            LocalTime time = LocalTime.parse(dateStr.split(" ")[1], TIME_FORMATTER);
 
-            Object time = null;
-            transactions.add(new Deposit(date, time, description, vendor, amount));
+            transactions.add(new Transaction(date, time, description, vendor, amount));
+            System.out.println("Deposit added.");
             saveTransactions(FILE_NAME);
 
 
