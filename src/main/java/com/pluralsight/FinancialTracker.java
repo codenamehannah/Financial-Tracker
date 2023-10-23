@@ -127,7 +127,23 @@ import java.util.Scanner;
             // The amount should be a positive number.
             // After validating the input, a new `Payment` object should be created with the entered values.
             // The new payment should be added to the `transactions` ArrayList.
+            System.out.print("Enter payment date (yyyy-MM-dd HH:mm:ss): ");
+            String dateStr = scanner.nextLine().trim();
+            System.out.print("Enter description: ");
+            String description = scanner.nextLine().trim();
+            System.out.print("Enter vendor: ");
+            String vendor = scanner.nextLine().trim();
+            System.out.print("Enter amount: ");
+            double amount = Double.parseDouble(scanner.nextLine().trim());
+
+            LocalDate date = LocalDate.parse(dateStr.split(" ")[0], DATE_FORMATTER);
+            LocalTime time = LocalTime.parse(dateStr.split(" ")[1], TIME_FORMATTER);
+
+            transactions.add(new Transaction(date, time, description, vendor, -amount)); // Note the negative amount for payments
+            System.out.println("Payment added.");
+            saveTransactions(FILE_NAME); // save transactions after adding a payment
         }
+
 
         private static void ledgerMenu(Scanner scanner) {
             boolean running = true;
