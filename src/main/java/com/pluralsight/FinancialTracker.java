@@ -183,16 +183,39 @@ import java.util.Scanner;
         private static void displayLedger() {
             // This method should display a table of all transactions in the `transactions` ArrayList.
             // The table should have columns for date, time, vendor, type, and amount.
+            Collections.sort(transactions);
+            System.out.println("Ledger (All Entries)");
+            System.out.println("Date | Time | Description | Vendor | Amount");
+
+            for (Transaction transaction : transactions) {
+                System.out.println(transaction);
+            }
         }
 
         private static void displayDeposits() {
             // This method should display a table of all deposits in the `transactions` ArrayList.
             // The table should have columns for date, time, vendor, and amount.
+            System.out.println("Deposits");
+            System.out.println("Date | Time | Description | Vendor | Amount");
+
+            for (Transaction transaction : transactions) {
+                if (transaction instanceof Deposit) {
+                    System.out.println(transaction);
+                }
+            }
         }
 
         private static void displayPayments() {
             // This method should display a table of all payments in the `transactions` ArrayList.
             // The table should have columns for date, time, vendor, and amount.
+            System.out.println("Payments");
+            System.out.println("Date | Time | Description | Vendor | Amount");
+
+            for (Transaction transaction : transactions) {
+                if (transaction instanceof Payment) {
+                    System.out.println(transaction);
+                }
+            }
         }
 
         private static void reportsMenu(Scanner scanner) {
@@ -226,6 +249,10 @@ import java.util.Scanner;
                     case "5":
                         // Prompt the user to enter a vendor name, then generate a report for all transactions
                         // with that vendor, including the date, vendor, and amount for each transaction.
+                        System.out.print("Enter vendor name: ");
+                        String vendorName = scanner.nextLine().trim();
+                        searchByVendor(vendorName);
+                        break;
                     case "0":
                         running = false;
                     default:
