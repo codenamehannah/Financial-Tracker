@@ -2,13 +2,8 @@ package com.pluralsight;
 
     package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
+    import java.io.*;
+    import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -70,7 +65,49 @@ import java.util.Scanner;
             // For example: 2023-04-29,13:45:00,Amazon,PAYMENT,29.99
             // After reading all the transactions, the file should be closed.
             // If any errors occur, an appropriate error message should be displayed.
+            try {
+                File file = new File(fileName);
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split("\\\\|");
+                    if (parts.length == 5) {
+                        String dateStr = parts[0].trim();
+                        String timeStr = parts[1].trim();
+                        String description = parts[2].trim();
+                        String vendor = parts[3].trim();
+                        double amount = Double.parseDouble(parts[4].trim());
+
+                        LocalDate date = LocalDate.parse(dateStr, DATE_FORMATTER);
+                        LocalTime time = LocalTime.parse(timeStr, TIME_FORMATTER);
+
+                        transactions.add(new Transaction(date, time, description, vendor, amount));
+
+
+                    }
+                }
+                reader.close();
+
+            } catch (IOException e) catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.err.println("Error loading transactions: " + e.getMessage());
+
         }
+            }
+
+
 
         private static void addDeposit(Scanner scanner) {
             // This method should prompt the user to enter the date, time, vendor, and amount of a deposit.
