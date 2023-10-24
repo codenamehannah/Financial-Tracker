@@ -270,6 +270,23 @@ import java.util.Scanner;
             // The method loops through the transactions list and checks each transaction's date against the date range.
             // Transactions that fall within the date range are printed to the console.
             // If no transactions fall within the date range, the method prints a message indicating that there are no results.
+            System.out.println("Transactions within the date range: " + startDate + " to " + endDate);
+            System.out.println("Date | Time | Description | Vendor | Amount");
+
+            boolean found = false;
+
+            for (Transaction transaction : transactions) {
+                LocalDate transactionDate = transaction.getDate();
+                if (transactionDate.isEqual(startDate) || transactionDate.isEqual(endDate) ||
+                        (transactionDate.isAfter(startDate) && transactionDate.isBefore(endDate))) {
+                    System.out.println(transaction);
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("No transactions found within the specified date range.");
+            }
         }
 
         private static void filterTransactionsByVendor(String vendor) {
@@ -278,7 +295,22 @@ import java.util.Scanner;
             // The method loops through the transactions list and checks each transaction's vendor name against the specified vendor name.
             // Transactions with a matching vendor name are printed to the console.
             // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
+            System.out.println("Transactions for Vendor: " + vendor);
+            System.out.println("Date | Time | Description | Amount");
+
+            boolean found = false;
+
+            for (Transaction transaction : transactions) {
+                if (transaction.getVendor().equalsIgnoreCase(vendor)) {
+                    System.out.println(transaction.toVendorString());
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("No transactions found for the specified vendor.");
+            }
         }
-    }
+        }
 
 
