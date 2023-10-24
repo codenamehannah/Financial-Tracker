@@ -72,4 +72,12 @@ public class Transaction {
 
 
     }
+
+    public int toVendorString() {
+        return 0;
+    }
+
+    public int toCsv() {
+        return 0;
+    }
 }
