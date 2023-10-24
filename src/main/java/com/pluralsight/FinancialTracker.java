@@ -1,7 +1,5 @@
 package com.pluralsight;
 
-    package com.pluralsight;
-
     import java.io.*;
     import java.time.LocalDate;
 import java.time.LocalTime;
@@ -57,14 +55,6 @@ import java.util.Scanner;
         }
 
         public static void loadTransactions(String fileName) {
-            // This method should load transactions from a file with the given file name.
-            // If the file does not exist, it should be created.
-            // The transactions should be stored in the `transactions` ArrayList.
-            // Each line of the file represents a single transaction in the following format:
-            // <date>,<time>,<vendor>,<type>,<amount>
-            // For example: 2023-04-29,13:45:00,Amazon,PAYMENT,29.99
-            // After reading all the transactions, the file should be closed.
-            // If any errors occur, an appropriate error message should be displayed.
             try {
                 File file = new File(fileName);
 
@@ -96,11 +86,6 @@ import java.util.Scanner;
 
 
         private static void addDeposit(Scanner scanner) {
-            // This method should prompt the user to enter the date, time, vendor, and amount of a deposit.
-            // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
-            // The amount should be a positive number.
-            // After validating the input, a new `Deposit` object should be created with the entered values.
-            // The new deposit should be added to the `transactions` ArrayList.
 
             System.out.print("Enter deposit date (yyyy-MM-dd HH:mm:ss): ");
             String dateStr = scanner.nextLine().trim();
@@ -122,11 +107,6 @@ import java.util.Scanner;
         }
 
         private static void addPayment(Scanner scanner) {
-            // This method should prompt the user to enter the date, time, vendor, and amount of a payment.
-            // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
-            // The amount should be a positive number.
-            // After validating the input, a new `Payment` object should be created with the entered values.
-            // The new payment should be added to the `transactions` ArrayList.
             System.out.print("Enter payment date (yyyy-MM-dd HH:mm:ss): ");
             String dateStr = scanner.nextLine().trim();
             System.out.print("Enter description: ");
@@ -236,16 +216,23 @@ import java.util.Scanner;
                     case "1":
                         // Generate a report for all transactions within the current month,
                         // including the date, vendor, and amount for each transaction.
+                        generateReport(LocalDate.now().withDayOfMonth(1), LocalDate.now());
+                        break;
                     case "2":
                         // Generate a report for all transactions within the previous month,
                         // including the date, vendor, and amount for each transaction.
+                        generateReport(LocalDate.now().minusMonths(1).withDayOfMonth(1), LocalDate.now().withDayOfMonth(1).minusDays(1));
                     case "3":
                         // Generate a report for all transactions within the current year,
                         // including the date, vendor, and amount for each transaction.
+                        generateReport(LocalDate.now().withDayOfYear(1), LocalDate.now());
+                        break;
 
                     case "4":
                         // Generate a report for all transactions within the previous year,
                         // including the date, vendor, and amount for each transaction.
+                        generateReport(LocalDate.now().minusYears(1).withDayOfYear(1), LocalDate.now().withDayOfYear(1).minusDays(1));
+                        break;
                     case "5":
                         // Prompt the user to enter a vendor name, then generate a report for all transactions
                         // with that vendor, including the date, vendor, and amount for each transaction.
@@ -258,6 +245,20 @@ import java.util.Scanner;
                     default:
                         System.out.println("Invalid option");
                         break;
+                }
+            }
+        }
+        private static void generateReport(LocalDate startDate, LocalDate endDate) {
+            System.out.println("Report");
+            System.out.println("Date | Vendor | Amount");
+
+            for (Transaction transaction : transactions){
+                LocalDate transactionDate = transaction.getDate();
+                if (transactionDate.isEqual(startDate) || transactionDate.isEqual(endDate) ||
+                        (transactionDate.isAfter(startDate) && transactionDate.isBefore(endDate))) {
+                    System.out.println(transaction.toReportString());
+
+
                 }
             }
         }
@@ -279,4 +280,5 @@ import java.util.Scanner;
             // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
         }
     }
-}
+
+
