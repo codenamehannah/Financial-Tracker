@@ -23,7 +23,7 @@ public class FinancialTracker {
         boolean running = true;
 
         while (running) {
-            System.out.println("Welcome to TransactionApp");
+            System.out.println("Welcome to Stuart's Financial Services");
             System.out.println("Choose an option:");
             System.out.println("D) Add Deposit");
             System.out.println("P) Make Payment (Debit)");
@@ -82,10 +82,11 @@ public class FinancialTracker {
     }
 
     private static void addDeposit(Scanner scanner) {
+        //Asks for deposit information in this section.
         System.out.println("Enter deposit information:");
         LocalDate date = askForDate(scanner);
         LocalTime time = askForTime(scanner);
-        System.out.print("Vendor: ");
+        System.out.print("Enter the name of the Vendor: ");
         String vendor = scanner.nextLine().trim();
         double amount = askForAmount(scanner);
 
@@ -95,10 +96,10 @@ public class FinancialTracker {
     }
 
     private static void addPayment(Scanner scanner) {
-        System.out.println("Enter payment information:");
+        System.out.println("Please enter the payment information:");
         LocalDate date = askForDate(scanner);
         LocalTime time = askForTime(scanner);
-        System.out.print("Vendor: ");
+        System.out.print("Please enter the name of the Vendor:: ");
         String vendor = scanner.nextLine().trim();
         double amount = -askForAmount(scanner);
 
