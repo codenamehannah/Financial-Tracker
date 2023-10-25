@@ -145,6 +145,7 @@ public class FinancialTracker {
         return amount;
     }
 
+    //The Method to display the Ledger Menu.
     private static void ledgerMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -156,18 +157,24 @@ public class FinancialTracker {
             System.out.println("R) Reports");
             System.out.println("H) Home");
 
+            //Read User inout for Ledger Options
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
                 case "A":
+                    //Display all transactions
                     displayLedger(transactions);
                     break;
+
                 case "D":
+                    //Display Deposits
                     displayDeposits();
                     break;
                 case "P":
+                    //Display Payments
                     displayPayments();
                     break;
+                    //For the Reports Menu
                 case "R":
                     reportsMenu(scanner);
                     break;
@@ -181,6 +188,7 @@ public class FinancialTracker {
         }
     }
 
+    //Method to display all ledger entries
     private static void displayLedger(ArrayList<Transaction> transactionsToDisplay) {
         Collections.reverse(transactionsToDisplay);
         System.out.println("Ledger:");
@@ -188,7 +196,7 @@ public class FinancialTracker {
             System.out.println(transaction);
         }
     }
-
+        //Method to display deposits
     private static void displayDeposits() {
         ArrayList<Transaction> deposits = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -202,7 +210,7 @@ public class FinancialTracker {
             System.out.println(deposit);
         }
     }
-
+        //Method to display Payments
     private static void displayPayments() {
         ArrayList<Transaction> payments = new ArrayList<>();
         for (Transaction transaction : transactions) {
@@ -217,6 +225,7 @@ public class FinancialTracker {
         }
     }
 
+    //Method to navigate the reports menu
     private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
@@ -233,22 +242,27 @@ public class FinancialTracker {
 
             switch (input) {
                 case "1":
+                    //Generate a report for the current month
                     generateReport(LocalDate.now().withDayOfMonth(1), LocalDate.now());
                     break;
                 case "2":
+                    //Generate a report for the previous month
                     LocalDate firstDayOfPreviousMonth = LocalDate.now().minusMonths(1).withDayOfMonth(1);
                     LocalDate lastDayOfPreviousMonth = LocalDate.now().withDayOfMonth(1).minusDays(1);
                     generateReport(firstDayOfPreviousMonth, lastDayOfPreviousMonth);
                     break;
                 case "3":
+                    //Generate a report for the current year
                     generateReport(LocalDate.now().withDayOfYear(1), LocalDate.now());
                     break;
                 case "4":
+                    //Generate a report for the previous year
                     LocalDate firstDayOfPreviousYear = LocalDate.now().minusYears(1).withDayOfYear(1);
                     LocalDate lastDayOfPreviousYear = LocalDate.now().withDayOfYear(1).minusDays(1);
                     generateReport(firstDayOfPreviousYear, lastDayOfPreviousYear);
                     break;
                 case "5":
+                    //Filter Transactions by Vendor 
                     System.out.print("Enter Vendor Name: ");
                     String vendorName = scanner.nextLine().trim();
                     filterTransactionsByVendor(vendorName);
