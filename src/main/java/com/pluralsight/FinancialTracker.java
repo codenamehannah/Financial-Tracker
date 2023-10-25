@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class FinancialTracker {
 
+    //ArrayList to store Transactions
     private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private static final String FILE_NAME = "transactions.csv";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
@@ -281,8 +282,7 @@ public class FinancialTracker {
 
     private static void saveTransactions(String fileName) {
         try {
-            File file = new File(fileName);
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
             for (Transaction transaction : transactions) {
                 writer.write(transaction.toCsv());
                 writer.newLine();
