@@ -262,7 +262,7 @@ public class FinancialTracker {
                     generateReport(firstDayOfPreviousYear, lastDayOfPreviousYear);
                     break;
                 case "5":
-                    //Filter Transactions by Vendor 
+                    //Filter Transactions by Vendor
                     System.out.print("Enter Vendor Name: ");
                     String vendorName = scanner.nextLine().trim();
                     filterTransactionsByVendor(vendorName);
@@ -276,7 +276,7 @@ public class FinancialTracker {
             }
         }
     }
-
+        //Method to generate a report based on a date range
     private static void generateReport(LocalDate startDate, LocalDate endDate) {
         System.out.println("Report from " + startDate.format(DATE_FORMATTER) + " to " + endDate.format(DATE_FORMATTER) + ":");
         for (Transaction transaction : transactions) {
@@ -285,7 +285,7 @@ public class FinancialTracker {
             }
         }
     }
-
+        //Method to filter transactions by vendor
     private static void filterTransactionsByVendor(String vendor) {
         boolean found = false;
         for (Transaction transaction : transactions) {
@@ -301,7 +301,7 @@ public class FinancialTracker {
             System.out.println("No transactions found for vendor '" + vendor + "'.");
         }
     }
-
+        //Method to save transactions to a CSV file 
     private static void saveTransactions(String fileName) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
