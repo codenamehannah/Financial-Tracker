@@ -35,6 +35,7 @@ public class FinancialTracker {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
 
+            //read user input and process options
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
@@ -56,6 +57,7 @@ public class FinancialTracker {
             }
         }
 
+//Scanners always need fi close so close di sumn.
         scanner.close();
     }
 
@@ -85,7 +87,7 @@ public class FinancialTracker {
             System.out.println("Error loading transactions: " + e.getMessage());
         }
     }
-
+        //The Add Deposit Method for Adding Deposits
     private static void addDeposit(Scanner scanner) {
         //Asks for deposit information in this section.
         System.out.println("Enter deposit information:");
@@ -97,9 +99,11 @@ public class FinancialTracker {
 
         Transaction deposit = new Transaction(date, time, "Deposit", vendor, amount);
         transactions.add(deposit);
+
+        //Save transactions to a file.
         saveTransactions(FILE_NAME);
     }
-
+        //The Method to add a Payment for Adding Payments
     private static void addPayment(Scanner scanner) {
         System.out.println("Please enter the payment information:");
         LocalDate date = askForDate(scanner);
