@@ -23,6 +23,7 @@ public class FinancialTracker {
     public static void main(String[] args) {
         //For loading Transactions from CSv File
         loadTransactions(FILE_NAME);
+        //This scanner is for user input
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
