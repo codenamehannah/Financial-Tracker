@@ -301,7 +301,7 @@ public class FinancialTracker {
             System.out.println("No transactions found for vendor '" + vendor + "'.");
         }
     }
-        //Method to save transactions to a CSV file 
+        //Method to save transactions to a CSV file
     private static void saveTransactions(String fileName) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName,true));
