@@ -72,9 +72,9 @@ This Java application, developed by ***Jaarona Hannah Stuart***, builds upon a s
 
 
 ## Ledger
-```
-The ledger menu provides the following options:
 
+***The ledger menu provides the following options:***
+```
 ***A)*** 
 All View all transactions, including deposits and payments.
 
